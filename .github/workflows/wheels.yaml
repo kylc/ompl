@@ -2,8 +2,6 @@ name: Build Wheels
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
 
 jobs:
   build_wheels:
@@ -14,7 +12,7 @@ jobs:
         os: [ubuntu-22.04, macos-13]
         arch: [x86_64]
         include:
-          - os: macos-13
+          - os: macos-14
             arch: arm64
     steps:
       - name: Check out repository code
