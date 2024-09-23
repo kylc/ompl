@@ -3,8 +3,8 @@
 set -eux
 
 # Dependency versions.
-castxml_version="0.6.2" # version specifier for Linux only
-boost_version="1.83.0"
+castxml_version="0.6.8" # version specifier for Linux only
+boost_version="1.86.0"
 
 # Collect some information about the build target.
 build_os="$(uname)"
