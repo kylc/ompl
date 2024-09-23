@@ -25,11 +25,8 @@ include(OMPLUtils)
 
 set(OMPL_CMAKE_UTIL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules"
     CACHE FILEPATH "Path to directory with auxiliary CMake scripts for OMPL")
-set(OMPL_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/src;${CMAKE_CURRENT_BINARY_DIR}/src")
 set(OMPL_DEMO_INSTALL_DIR "${CMAKE_INSTALL_DATAROOTDIR}/ompl/demos"
     CACHE STRING "Relative path to directory where demos will be installed")
-
-include_directories("${OMPL_INCLUDE_DIRS}")
 
 if(MSVC)
     add_definitions(-DBOOST_ALL_NO_LIB)
@@ -190,7 +187,7 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/
     FILES_MATCHING PATTERN "Find*.cmake")
 install(TARGETS ompl
     EXPORT omplExport
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}
     COMPONENT ompl)
 install(EXPORT omplExport
     NAMESPACE ompl::
@@ -219,7 +216,8 @@ if (OMPL_REGISTRATION)
         file(WRITE "${CMAKE_CURRENT_SOURCE_DIR}/.registered" "")
         find_package(Python QUIET)
         if (PYTHON_FOUND)
-            execute_process(COMMAND "${PYTHON_EXEC}" "-m" "webbrowser" "https://ompl.kavrakilab.org/core/register.html"
+            execute_process(COMMAND ${CMAKE_COMMAND} -E env
+               TERM="" "${PYTHON_EXEC}" "-m" "webbrowser" "https://ompl.kavrakilab.org/core/register.html"
                 OUTPUT_QUIET ERROR_QUIET)
         endif()
     endif()

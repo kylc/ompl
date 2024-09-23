@@ -20,8 +20,8 @@ install_boost() {
     # multiple on the host system.
     python_include_path=$(python3 -c "from sysconfig import get_paths as gp; print(gp()['include'])")
     echo "using python : ${python_version} : : ${python_include_path} ;" > "$HOME/user-config.jam"
-
-    ./bootstrap.sh --with-toolset=clang
+    pip3 install numpy
+    ./bootstrap.sh
     sudo ./b2 "${b2_args[@]}" \
         --with-serialization \
         --with-filesystem \
