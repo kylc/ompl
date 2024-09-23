@@ -107,23 +107,23 @@ class CMakeBuild(build_ext):
 
         if sys.platform.startswith("darwin"):
             # Search these paths to try to find the clang++ binary.
-            potential_clang_paths = [
-                "/usr/local/opt/llvm@18/bin/clang++",
-                "/opt/homebrew/opt/llvm@18/bin/clang++",
-            ]
-            clang_bin_path = next(
-                filter(lambda p: Path(p).exists(), potential_clang_paths), None
-            )
+            # potential_clang_paths = [
+            #     "/usr/local/opt/llvm@18/bin/clang++",
+            #     "/opt/homebrew/opt/llvm@18/bin/clang++",
+            # ]
+            # clang_bin_path = next(
+            #     filter(lambda p: Path(p).exists(), potential_clang_paths), None
+            # )
 
-            if clang_bin_path is None:
-                print(
-                    "Could not find clang++ binary. Search paths:",
-                    potential_clang_paths,
-                )
-                sys.exit(1)
+            # if clang_bin_path is None:
+            #     print(
+            #         "Could not find clang++ binary. Search paths:",
+            #         potential_clang_paths,
+            #     )
+            #     sys.exit(1)
 
             # TODO: Move these out to configuration
-            cmake_args += [f"-DCMAKE_CXX_COMPILER={clang_bin_path}"]
+            # cmake_args += [f"-DCMAKE_CXX_COMPILER={clang_bin_path}"]
             cmake_args += ["-DCMAKE_OSX_DEPLOYMENT_TARGET=13.0"]
 
             # Cross-compile support for macOS - respect ARCHFLAGS if set
